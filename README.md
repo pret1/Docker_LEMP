@@ -1,1 +1,1 @@
-In this project we create a simple application about articles and authors. That app include PHP, Composer, Xdebug, Nginx, MySQL
+In this project we create a simple application about articles and authors. That app include PHP, Composer, Xdebug, Nginx, MySQL 
