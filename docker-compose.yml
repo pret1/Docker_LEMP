@@ -1,0 +1,26 @@
+version: '3'
+services:
+  php:
+    build: ./docker/php/
+    volumes:
+      - './src:/var/www/html'
+    environment:
+      - XDEBUG_CONFIG=idekey=PHPSTORM
+      - PHP_IDE_CONFIG=serverName=localhost
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - './src:/var/www/html'
+      - './docker/nginx/conf.d:/etc/nginx/conf.d'  
+  
+  mysql:
+    image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 3306:3306
+    volumes:
+      - './my-db:/var/lib/mysql'
