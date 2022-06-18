@@ -19,6 +19,9 @@ RUN pecl install xdebug \
 RUN pecl install pcov \
     && docker-php-ext-enable pcov
 
+# Install unzip
+RUN apt-get update && apt-get install -y unzip
+
 ADD conf.d/xdebug.ini $PHP_INI_DIR/conf.d/zz-xdebug.ini
 ADD conf.d/error_reporting.ini $PHP_INI_DIR/conf.d/error_xdebug.ini
 
