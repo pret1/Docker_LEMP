@@ -1,26 +1,47 @@
 version: '3'
 services:
   php:
+    container_name: php
     build: ./docker/php/
     volumes:
-      - './symfony:/var/www/html'
+      - ./symfony:/var/www/html
+    networks:
+      - docker-symfony
     environment:
       - XDEBUG_CONFIG=idekey=PHPSTORM
       - PHP_IDE_CONFIG=serverName=localhost
 
   nginx:
+    container_name: nginx
     image: nginx:latest
     ports:
       - 80:80
+    networks:
+      - docker-symfony
     volumes:
-      - './symfony:/var/www/html'
-      - './docker/nginx/conf.d:/etc/nginx/conf.d'  
+      - ./symfony:/var/www/html
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
   
   mysql:
+    container_name: mysql
     image: mysql:8
+    networks:
+      - docker-symfony
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - TERM=meh
     ports:
       - 3306:3306
     volumes:
-      - './my-db:/var/lib/mysql'
+      - ./my-db:/var/lib/mysql
+
+networks:
+ docker-symfony:
+  driver: bridge
+
+volumes:
+  my-db:
+  symfony:

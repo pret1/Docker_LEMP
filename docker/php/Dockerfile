@@ -6,6 +6,26 @@ RUN apt-get update \
   # dependency for zip
     libzip-dev
 
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    ssh \
+    libssl-dev \
+    zlib1g-dev \
+    git \
+    zip \
+    unzip \
+    netcat \
+    gnupg \
+    libbz2-dev \
+    libxml2-dev \
+    libpq-dev \
+    libzip-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev
+
+RUN pecl install apcu redis
+
 #Install mysqli
 RUN docker-php-ext-install mysqli \
     zip
@@ -18,6 +38,23 @@ RUN pecl install xdebug \
 
 RUN pecl install pcov \
     && docker-php-ext-enable pcov
+
+
+# Install MySQL driver for PDO
+RUN docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd
+RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
+RUN docker-php-ext-install -j$(nproc) \
+    soap \
+    bz2 \
+    zip \
+    opcache \
+    intl \
+    pdo \
+    pdo_mysql \
+    gd
+
+RUN docker-php-ext-enable apcu pdo_mysql redis
+
 
 # Install unzip
 RUN apt-get update && apt-get install -y unzip
