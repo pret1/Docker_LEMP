@@ -39,6 +39,7 @@ RUN pecl install xdebug \
 RUN pecl install pcov \
     && docker-php-ext-enable pcov
 
+WORKDIR /var/www/html
 
 # Install MySQL driver for PDO
 RUN docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd
@@ -70,6 +71,20 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
+
+RUN groupadd -g 1552200513 symfony
+RUN useradd --no-log-init -d /home/symfony -s /bin/bash -u 1552265627 -g 1552200513 symfony
+RUN echo "symfony:symfony" | chpasswd && adduser symfony sudo
+
+RUN mkdir -p /home/symfony
+RUN mkdir -p /var/www/html
+RUN mkdir -p /var/www/.composer
+RUN chown -R symfony:symfony /home/symfony
+RUN chown -R symfony:symfony /var/www/html
+RUN chown -R symfony:symfony /var/www/.composer
+RUN chown -R symfony:symfony /usr/local/etc
+
+USER symfony
 
 RUN apt-get -y update
 RUN apt-get -y install git
