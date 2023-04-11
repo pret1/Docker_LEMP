@@ -5,6 +5,7 @@ services:
     build: ./docker/php/
     volumes:
       - ./symfony:/var/www/html
+      - ./bundles:/var/www/bundles
     networks:
       - docker-symfony
     environment:
