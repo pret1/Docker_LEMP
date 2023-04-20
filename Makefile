@@ -46,3 +46,6 @@ php.bash: ##@APP enter docker php container
 symfony.up:  ##@DOCKER up all docker containers
 	docker compose up -d
 	docker compose ps
+
+symfony.d:  ##@DOCKER down all docker containers
+	docker compose down
