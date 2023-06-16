@@ -14,7 +14,7 @@ RUN apt-get update && \
     git \
     zip \
     unzip \
-    netcat \
+    netcat-traditional \
     gnupg \
     libbz2-dev \
     libxml2-dev \
@@ -22,7 +22,9 @@ RUN apt-get update && \
     libzip-dev \
     libpng-dev \
     libjpeg-dev \
-    libfreetype6-dev
+    libfreetype6-dev \
+    dnsutils \
+    iputils-ping
 
 RUN pecl install apcu redis
 
@@ -69,25 +71,22 @@ ADD conf.d/error_reporting.ini $PHP_INI_DIR/conf.d/error_xdebug.ini
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN curl -sS https://get.symfony.com/cli/installer | bash
-RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
-
 RUN apt-get -y update
 RUN apt-get -y install git
 
 RUN git config --global user.email "konovsc@gmail.com" \
     && git config --global user.name "konovsc"
 
-RUN groupadd -g 1552200513 symfony
-RUN useradd --no-log-init -d /home/symfony -s /bin/bash -u 1552265627 -g 1552200513 symfony
-RUN echo "symfony:symfony" | chpasswd && adduser symfony sudo
+RUN groupadd -g 1552200513 yii
+RUN useradd --no-log-init -d /home/yii -s /bin/bash -u 1552265627 -g 1552200513 yii
+RUN echo "yii:yii" | chpasswd && adduser yii sudo
 
-RUN mkdir -p /home/symfony
+RUN mkdir -p /home/yii
 RUN mkdir -p /var/www/html
 RUN mkdir -p /var/www/.composer
-RUN chown -R symfony:symfony /home/symfony
-RUN chown -R symfony:symfony /var/www/html
-RUN chown -R symfony:symfony /var/www/.composer
-RUN chown -R symfony:symfony /usr/local/etc
+RUN chown -R yii:yii /home/yii
+RUN chown -R yii:yii /var/www/html
+RUN chown -R yii:yii /var/www/.composer
+RUN chown -R yii:yii /usr/local/etc
 
-USER symfony
+USER yii
