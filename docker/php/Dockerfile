@@ -13,7 +13,7 @@ RUN docker-php-ext-install mysqli \
 RUN docker-php-ext-enable mysqli
 
 #Install xdebug
-RUN pecl install xdebug \
+RUN pecl install xdebug-2.9.8 \
     && docker-php-ext-enable xdebug
 
 RUN pecl install pcov \
