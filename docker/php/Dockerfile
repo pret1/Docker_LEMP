@@ -14,7 +14,7 @@ RUN apt-get update && \
     git \
     zip \
     unzip \
-    netcat \
+    netcat-traditional \
     gnupg \
     libbz2-dev \
     libxml2-dev \
@@ -91,3 +91,5 @@ RUN chown -R symfony:symfony /var/www/.composer
 RUN chown -R symfony:symfony /usr/local/etc
 
 USER symfony
+
+CMD ["php-fpm", "-F"]
