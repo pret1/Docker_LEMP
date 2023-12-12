@@ -41,6 +41,11 @@ RUN pecl install pcov \
 
 WORKDIR /var/www/html
 
+ADD docker-entrypoint.sh /docker-entrypoint.sh
+
+RUN ["chmod", "+x", "/docker-entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
 # Install MySQL driver for PDO
 RUN docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd
 RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
@@ -61,7 +66,7 @@ RUN docker-php-ext-enable apcu pdo_mysql redis
 RUN apt-get update && apt-get install -y unzip
 
 # install node.js
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y nodejs
 
 ADD conf.d/xdebug.ini $PHP_INI_DIR/conf.d/zz-xdebug.ini
@@ -72,14 +77,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
 
-RUN apt-get -y update
-RUN apt-get -y install git
+ADD etc/php-fpm.conf /usr/local/etc/
 
-RUN git config --global user.email "konovsc@gmail.com" \
-    && git config --global user.name "konovsc"
-
-RUN groupadd -g 1552200513 symfony
-RUN useradd --no-log-init -d /home/symfony -s /bin/bash -u 1552265627 -g 1552200513 symfony
+RUN groupadd -g 1000 symfony
+RUN useradd --no-log-init -d /home/symfony -s /bin/bash -u 1000 -g 1000 symfony
 RUN echo "symfony:symfony" | chpasswd && adduser symfony sudo
 
 RUN mkdir -p /home/symfony
