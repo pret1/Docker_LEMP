@@ -79,18 +79,20 @@ RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
 
 ADD etc/php-fpm.conf /usr/local/etc/
 
-RUN groupadd -g 1000 symfony
-RUN useradd --no-log-init -d /home/symfony -s /bin/bash -u 1000 -g 1000 symfony
-RUN echo "symfony:symfony" | chpasswd && adduser symfony sudo
+RUN groupadd -g 1000 laravel
+RUN useradd --no-log-init -d /home/laravel -s /bin/bash -u 1000 -g 1000 laravel
+RUN echo "laravel:laravel" | chpasswd && adduser laravel sudo
 
-RUN mkdir -p /home/symfony
+COPY conf.d/* $PHP_INI_DIR/conf.d/
+
+RUN mkdir -p /home/laravel
 RUN mkdir -p /var/www/html
 RUN mkdir -p /var/www/.composer
-RUN chown -R symfony:symfony /home/symfony
-RUN chown -R symfony:symfony /var/www/html
-RUN chown -R symfony:symfony /var/www/.composer
-RUN chown -R symfony:symfony /usr/local/etc
+RUN chown -R laravel:laravel /home/laravel
+RUN chown -R laravel:laravel /var/www/html
+RUN chown -R laravel:laravel /var/www/.composer
+RUN chown -R laravel:laravel /usr/local/etc
 
-USER symfony
+USER laravel
 
 CMD ["php-fpm", "-F"]

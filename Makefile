@@ -43,9 +43,9 @@ help: ##@OTHER Show this help
 php.bash: ##@APP enter docker php container
 	docker compose exec -ti php bash
 
-symfony.up:  ##@DOCKER up all docker containers
+laravel.up:  ##@DOCKER up all docker containers
 	docker compose up -d
 	docker compose ps
 
-symfony.d:  ##@DOCKER down all docker containers
+laravel.d:  ##@DOCKER down all docker containers
 	docker compose down
