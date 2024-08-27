@@ -10,7 +10,11 @@ create .env
 
 copy .env.dist to .env
 
-in laravel folder if you change part with 
+docker compose exec php bash
+
+create project "composer create-project laravel/laravel example-app"
+
+in laravel folder if you change part with
 ```
 DB_CONNECTION=mysql
  DB_HOST=mysql
@@ -21,10 +25,6 @@ DB_CONNECTION=mysql
 ```
 
 don't forget run "docker compose run --rm php php artisan migrate"
-
-docker compose exec php bash
-
-create project "composer create-project laravel/laravel example-app"
 
 enter in php container ->  npm install
                         -> npm install vue@latest vue-loader@latest
