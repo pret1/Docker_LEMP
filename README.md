@@ -10,6 +10,18 @@ create .env
 
 copy .env.dist to .env
 
+in laravel folder if you change part with 
+```
+DB_CONNECTION=mysql
+ DB_HOST=mysql
+ DB_PORT=3306
+ DB_DATABASE=laravel
+ DB_USERNAME=laravel
+ DB_PASSWORD=laravel
+```
+
+don't forget run "docker compose run --rm php php artisan migrate"
+
 docker compose exec php bash
 
 create project "composer create-project laravel/laravel example-app"
