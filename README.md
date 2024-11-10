@@ -112,3 +112,10 @@ clean all and don't forgot add @vite('resources/js/app.js'), "div id="app"></div
 Update .env in laravel folder APP_URL=http://localhost:8080
 
 npm run dev
+
+if you start old project 
+you can get error "No application encryption key has been specified."
+you can get .env from prod environment OR 
+https://stackoverflow.com/questions/44839648/no-application-encryption-key-has-been-specified 
+php artisan key:generate 
+php artisan config:cache 
