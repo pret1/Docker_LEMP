@@ -65,6 +65,10 @@ RUN docker-php-ext-enable apcu pdo_mysql redis
 # Install unzip
 RUN apt-get update && apt-get install -y unzip
 
+RUN docker-php-ext-install -j$(nproc) pgsql
+
+RUN docker-php-ext-install -j$(nproc) pdo_pgsql
+
 # install node.js
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y nodejs

@@ -23,7 +23,14 @@ DB_CONNECTION=mysql
  DB_USERNAME=laravel
  DB_PASSWORD=laravel
 ```
-
+```
+DB_CONNECTION=pgsql
+DB_HOST=pgsql
+DB_PORT=5432
+DB_DATABASE=postgres
+DB_USERNAME=sun
+DB_PASSWORD=postgres
+```
 don't forget run "docker compose run --rm php php artisan migrate"
 
 enter in php container ->  npm install
