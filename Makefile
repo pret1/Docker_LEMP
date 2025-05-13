@@ -47,5 +47,10 @@ laravel.up:  ##@DOCKER up all docker containers
 	docker compose up -d
 	docker compose ps
 
-laravel.d:  ##@DOCKER down all docker containers
+magic:  ##@DOCKER up all docker containers and run npm
+	docker compose up -d
+	docker compose exec php npm run dev
+
+d:  ##@DOCKER down all docker containers
 	docker compose down
+	docker ps
