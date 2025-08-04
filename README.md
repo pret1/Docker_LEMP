@@ -130,3 +130,5 @@ php artisan config:cache
 can help for laravel12
 https://dev.to/robin-ivi/laravel-12-and-vue-3-ultimate-starter-guide-3bmd
 npm install vue@latest vue-router@latest @vitejs/plugin-vue
+
+"~/.composer/vendor/bin/laravel new my-app" instead "laravel new my-app" if can't find laravel in container 
