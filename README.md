@@ -125,4 +125,8 @@ you can get error "No application encryption key has been specified."
 you can get .env from prod environment OR 
 https://stackoverflow.com/questions/44839648/no-application-encryption-key-has-been-specified 
 php artisan key:generate 
-php artisan config:cache 
+php artisan config:cache
+
+can help for laravel12
+https://dev.to/robin-ivi/laravel-12-and-vue-3-ultimate-starter-guide-3bmd
+npm install vue@latest vue-router@latest @vitejs/plugin-vue
