@@ -119,3 +119,6 @@ you can get .env from prod environment OR
 https://stackoverflow.com/questions/44839648/no-application-encryption-key-has-been-specified 
 php artisan key:generate 
 php artisan config:cache 
+
+in container if you prefer way "composer global require laravel/installer"
+/home/laravel/.config/composer/vendor/bin/laravel new my-app
