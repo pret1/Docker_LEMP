@@ -22,6 +22,7 @@ RUN apt-get update && \
     libzip-dev \
     libpng-dev \
     libjpeg-dev \
+    libicu-dev \
     libfreetype6-dev
 
 RUN pecl install apcu redis
