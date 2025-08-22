@@ -1,4 +1,4 @@
-FROM php:8.1-fpm
+FROM php:8.4-fpm
 
 # Install dependencies
 RUN apt-get update \
@@ -22,6 +22,7 @@ RUN apt-get update && \
     libzip-dev \
     libpng-dev \
     libjpeg-dev \
+    libicu-dev \
     libfreetype6-dev
 
 RUN pecl install apcu redis
